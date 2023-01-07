@@ -52,10 +52,12 @@ namespace CalculoLucro.Entidades
         public void Tabela(int quantLinhas)
         {
             // criação da Matriz e as variáveis utilizadas
-            double[,] Produto = new double[quantLinhas, 3];
+            var Produto = new string[quantLinhas, 4];
+            var quantInformadaString = "";
             var quantInformada = 0;
-            var valorOriginal = 0.0; 
-            var valorVenda = 0.0 ;
+            var nomeProduto = "";
+            var valorOriginalString = ""; 
+            var valorVendaString = "";
             var soma = 0.0;
             var lucro = 0.0;
 
@@ -63,45 +65,63 @@ namespace CalculoLucro.Entidades
             for (int lin = 0; lin < quantLinhas; lin++)
             {
                 // abertura do FOR para percorrer coluna, não necessário, mas caso no futuro o cliente queira adicionar quantidade de coluna a ser preenchida, pode receber dinamicamente
-                for (int col = 0; col < 3; col++)
+                for (int col = 0; col < 4; col++)
                 {
                     // captura dos valores, guardando na variável e enviando para Matriz, após damos um salto de coluna, para preencher a proxima
                     Console.Clear();
-                    Console.Write($"\nQuantas vendas foram realizadas do produto {lin + 1}?: ");
-                    quantInformada = Convert.ToInt32(Console.ReadLine());
-                    Produto[lin, col] = quantInformada;
+                    Console.Write($"\nQual o nome do Produto {lin + 1}?: ");
+                    nomeProduto = Console.ReadLine();
+                    Produto[lin, col] = nomeProduto;
                     col++;
-                    Console.Write($"\nQual valor original do produto {lin + 1}?: ");
-                    valorOriginal = Convert.ToDouble(Console.ReadLine());
+                    Console.Write($"\nQuantas vendas foram realizadas do produto {nomeProduto}?: ");
+                    quantInformadaString = Console.ReadLine();
+                    Produto[lin, col] = quantInformadaString;
+                    col++;
+
+                    Console.Write($"\nQual valor original do produto {nomeProduto}?: ");
+                    valorOriginalString = Console.ReadLine();
+                    double valorOriginal = Convert.ToDouble(valorOriginalString);
+                    quantInformada = Convert.ToInt32(quantInformadaString);
                     soma = soma + (valorOriginal * quantInformada);
-                    Produto[lin, col] = valorOriginal;
+                    Produto[lin, col] = valorOriginalString;
                     col++;
-                    Console.Write($"\nQual o valor de venda do produto {lin + 1}?: ");
-                    valorVenda = Convert.ToDouble(Console.ReadLine());
+
+                    Console.Write($"\nQual o valor de venda do produto {nomeProduto}?: ");
+                    valorVendaString = Console.ReadLine();
+                    double valorVenda = Convert.ToDouble(valorVendaString);
+                    quantInformada = Convert.ToInt32(quantInformadaString);
                     lucro = lucro + (valorVenda * quantInformada);
-                    Produto[lin, col] = valorVenda;
+                    Produto[lin, col] = valorVendaString;
                     col++;
                     
                 }
             }
 
-            // calculo dos impostos, lucro e valor total com a dedução do imposto
+            //calculo dos impostos, lucro e valor total com a dedução do imposto
             double imposto = lucro * 0.12;
             double total = lucro - soma - imposto;
 
-            // enviando valores trabalhados para a visualização
-            MostraValores(lucro, soma, imposto, total);
-
-                    
-        }
-
-        public void MostraValores(double lucro, double soma, double imposto, double total)
-        {
             // exibição dos valores finais
             Console.Clear();
             Console.WriteLine("=================================\n");
             Console.WriteLine("========= CALCULO LUCRO =========\n");
             Console.WriteLine("=================================\n");
+
+            for (int lin = 0; lin < quantLinhas; lin++)
+            {
+                Console.WriteLine($"Produto vendido: {Produto[lin, 0]}\nQuantidade Vendida: {Produto[lin, 1]} vendas\nValor original: R${Produto[lin, 2]}\nValor de venda: R${Produto[lin, 3]}");                  
+            }
+
+            //enviando valores trabalhados para a visualização
+            MostraValores(lucro, soma, imposto, total);
+        }
+
+        public void MostraValores(double lucro, double soma, double imposto, double total)
+        {
+            // exibição dos valores finais
+
+            Console.WriteLine("\n");
+            Console.WriteLine("\n");
             Console.WriteLine($"O valor total de venda foi: {lucro.ToString("C2")}. \nO valor dos impostos recolhidos foi: {imposto.ToString("C2")}. \nO valor total original do produto é: {soma.ToString("C2")}. \nO lucro foi de: {total.ToString("C2")}");
         }
     }
