@@ -115,7 +115,7 @@ namespace CalculoLucro.Entidades
                 var valorOriginal = Convert.ToDouble(Produto[lin, 2]);
                 var valorVenda = Convert.ToDouble(Produto[lin, 3]);
                 var imp = valorVenda * 0.12;
-                Console.WriteLine($"Produto vendido: {item.ToUpper()}\nQuantidade Vendida: {quantidade} vendas\nValor original: {valorOriginal.ToString("C2")}\nValor de venda: {valorVenda.ToString("C2")}\nValor do imposto: {imp.ToString("C2")}\n");                  
+                Console.WriteLine($"Produto vendido: {item.ToUpper()}\nQuantidade Vendida: {quantidade} VENDA(S)\nValor original: {valorOriginal.ToString("C2")}\nValor de venda: {valorVenda.ToString("C2")}\nValor do imposto: {imp.ToString("C2")}\n");                  
             }
 
             //enviando valores trabalhados para a visualização
