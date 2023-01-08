@@ -73,6 +73,7 @@ namespace CalculoLucro.Entidades
                     nomeProduto = Console.ReadLine();
                     Produto[lin, col] = nomeProduto;
                     col++;
+
                     Console.Write($"\nQuantas vendas foram realizadas do produto {nomeProduto}?: ");
                     quantInformadaString = Console.ReadLine();
                     Produto[lin, col] = quantInformadaString;
@@ -109,7 +110,12 @@ namespace CalculoLucro.Entidades
 
             for (int lin = 0; lin < quantLinhas; lin++)
             {
-                Console.WriteLine($"Produto vendido: {Produto[lin, 0]}\nQuantidade Vendida: {Produto[lin, 1]} vendas\nValor original: R${Produto[lin, 2]}\nValor de venda: R${Produto[lin, 3]}");                  
+                var item = Produto[lin, 0];
+                var quantidade = Convert.ToInt32(Produto[lin, 1]);
+                var valorOriginal = Convert.ToDouble(Produto[lin, 2]);
+                var valorVenda = Convert.ToDouble(Produto[lin, 3]);
+                var imp = valorVenda * 0.12;
+                Console.WriteLine($"Produto vendido: {item.ToUpper()}\nQuantidade Vendida: {quantidade} vendas\nValor original: {valorOriginal.ToString("C2")}\nValor de venda: {valorVenda.ToString("C2")}\nValor do imposto: {imp.ToString("C2")}\n");                  
             }
 
             //enviando valores trabalhados para a visualização
@@ -119,8 +125,6 @@ namespace CalculoLucro.Entidades
         public void MostraValores(double lucro, double soma, double imposto, double total)
         {
             // exibição dos valores finais
-
-            Console.WriteLine("\n");
             Console.WriteLine("\n");
             Console.WriteLine($"O valor total de venda foi: {lucro.ToString("C2")}. \nO valor dos impostos recolhidos foi: {imposto.ToString("C2")}. \nO valor total original do produto é: {soma.ToString("C2")}. \nO lucro foi de: {total.ToString("C2")}");
         }
