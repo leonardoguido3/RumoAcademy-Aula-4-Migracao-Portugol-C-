@@ -29,13 +29,13 @@ namespace ReceberNumeros.Entidades
 
         public void PercorreValores()
         {
-            for (int i = 0; i < 15; i++)
+            foreach (var numero in Numeros)
             {
-                if (Numeros[i] >= 0 )
+                if(numero > 0)
                 {
-                    var positivo = Numeros[i];
-                    Console.WriteLine($"O {i + 1}° é: {positivo}");
+                    Console.WriteLine($"Os numeros positivos são: \n {numero}");
                 }
+                
             }
         }
     }
