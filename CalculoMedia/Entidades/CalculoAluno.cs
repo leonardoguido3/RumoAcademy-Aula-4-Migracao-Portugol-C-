@@ -14,6 +14,7 @@ namespace CalculoMedia.Entidades
             Console.WriteLine("=================================\n");
             Console.WriteLine("========= CALCULO MÉDIA =========\n");
             Console.WriteLine("=================================\n");
+            Console.WriteLine(Environment.NewLine);
             Console.Write("\nQuantos alunos possui na turma? : ");
             var quantidadeAlunos = Convert.ToInt32(Console.ReadLine());
 
